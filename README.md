@@ -1,0 +1,2 @@
+# ThinkPython
+Balder and stronger
