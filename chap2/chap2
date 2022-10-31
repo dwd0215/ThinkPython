@@ -1,0 +1,21 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Oct 20 09:41:18 2022
+
+@author: dwd
+"""
+
+#Exercise2.1
+#1.SyntaeError, 变量名不以数字开头 #%%
+#2.合法，表示赋值x=1,y=1 #%%
+#3.正常运行 #%%
+#4.SyntaeError #%%
+
+#Exercise2.2
+import math
+print(4/3*5**3*math.pi) #%%
+print(24.95*0.6*60+3+0.75*59) #1美元等于100美分，即75美分等于0.75美元 #%%
+
+a=8.15 #a为轻松跑配速
+b=7.12 #b为节奏跑配速
+print(a*2+b*3) #计算总耗时为37min66s，即38min6s，回到家时间为7点半零6秒 #%%]
