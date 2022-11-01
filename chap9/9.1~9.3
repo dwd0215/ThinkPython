@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov  1 20:29:35 2022
+
+@author: dwd
+"""
+
+#9.1
+fin=open('words.txt')
+for line in fin:
+   word=line.strip()
+   if len(word)>20:
+       print(word)
+
+#9.2       
+def has_no_e(word):
+    for letter in word:
+        if letter =='e':
+            return False
+    return True
+
+#9.3
+def avoids(word,forbidden):
+    for letter in word:
+        if letter in forbidden:
+            return False
+    return True
+    
