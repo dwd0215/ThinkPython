@@ -1,0 +1,76 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Oct 31 15:08:37 2022
+
+@author: dwd
+"""
+
+#3.1
+def right_justify(s):
+    n=70-len(s)
+    print(' '*n+s)
+    
+right_justify('happy')
+
+#3.2.1
+def do_twice(f):
+    f()
+    f()
+    
+def print_spam():
+    print('spam')
+    
+do_twice(print_spam)
+    
+#3.2.2
+def do_twice01(f,s):
+    f(s)
+    f(s)
+    
+def print_spam01(s):
+    print(s)
+    
+do_twice01(print_spam01,'happy')
+
+#3.2.4
+def print_twice(bruce):
+    print(bruce)
+    print(bruce)
+    
+do_twice01(print_twice,'spam')
+
+#3.2.5
+def do_four(f,s):
+    f(s)
+    f(s)
+    
+do_four(print_twice,'spam')
+
+#3.3.1
+def one_gridcolumn():
+    print('|',' '*5)
+    print('|',' '*5)
+    print('|',' '*5)
+    print('|',' '*5)
+    
+def one_gridline():
+    print('+','—','—','—','—',)
+    
+def addcolumn():
+    print('+')
+    one_gridcolumn()
+    
+    
+def halfgrid():
+    one_gridline()
+    one_gridcolumn()
+    
+def grid(h):
+    h()
+    
+grid(halfgrid)
+
+    
+    
+
+  
