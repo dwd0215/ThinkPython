@@ -1,0 +1,67 @@
+# 7.1
+def mysqrt(a):
+    x = a / 2  # 防止x=0，那么a/x的商就是0，非法
+    while True:
+        y = (x + a / x) / 2
+        if abs(y - x) < 0.0000001:
+            return x  # mysqrt函数没有返回值，会自动返回None，所以需要return x
+            break
+        x = y
+
+import math
+
+def test_squre_root():
+    print("%-5s\t%-20s\t%-30s\t%-5s" % ("a", "mysqrt(a)", "mathsqrt(a)", "diff"))  # 打印表头，前面一串是控制表头之间的距离
+    print("%-5s\t%-20s\t%-30s\t%-10s" % ("-", "---------", "-----------", "----"))
+    for i in range(1, 10):
+        mysqrt1 = mysqrt(i)
+        mathsqrt = math.sqrt(i)
+        diff = abs(mysqrt1 - mathsqrt)
+        print("%-5s\t%-20s\t%-30s\t%-10s" % (i, mysqrt1, mathsqrt, diff))   #??
+
+
+print(test_squre_root())
+
+
+# 7.2
+def eval_loop():
+    while True:
+        print('Please enter your line:\n')
+        line = input()
+        if line == "done":
+            print(line)
+            break
+        else:
+            value = eval(line)
+            print(value)
+
+#7.3
+import math
+def factorial(n):
+    if n==0:
+        return 1
+    else:
+        recurse=factorial(n-1)
+        result=n*recurse
+        return result
+
+def estimate_pi():
+    pre=2*math.sqrt(2)/9801
+    k=0
+    total=0
+    sig=factorial(4*k)*(1103+26390*k)/factorial(k)**4/396**(4*k)
+    while True:
+        total=total+sig
+        k=k+1
+        if sig < 1e-15:
+            print(pre*total)
+            break
+        pi = 1 / (pre * total)
+        if abs(math.pi-pi)<0.0000001:
+            print('The estimate is accurate')
+        print('Please debug your code')
+
+print(estimate_pi())
+
+
+
