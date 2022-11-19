@@ -1,0 +1,17 @@
+#8.2
+word='banana'
+cnt=word.count('a')
+print(cnt)
+
+#8.3
+def is_palindrome(word):
+    if word[0:] ==word[::-1]:
+        print(True)
+    else:
+        print(False)
+
+print(is_palindrome('noon'))
+
+
+
+
