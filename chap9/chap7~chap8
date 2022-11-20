@@ -1,0 +1,57 @@
+#9.7
+def is_triple_double_word(word):
+    if len(word)<6:
+        return False
+    one=0
+    two=2
+    three=4
+    while three<len(word)-1:
+        if word[one] == word[one+1] and word[two] == word[two+1] and word[three] == word[three+1]:
+            return True
+        one +=1
+        two +=1
+        three +=1
+    return False
+
+sum=0
+num=0
+fin=open('words.txt')
+for line in fin:
+    word=line.strip()
+    sum =sum+1
+    if is_triple_double_word(word):
+        num +=1
+        print(word)
+
+ratio= num/sum *100
+print('sum=',sum)
+print('num=',num)
+print('ratio=',ratio)
+
+#9.8
+def parlindrome(num,start,length):
+    s=str(num)[start:start+length]
+    return s==s[::-1]  # 生成倒序字符串
+
+def check(num):
+    if parlindrome[num,2,4] and parlindrome[num+1,1,5] and parlindrome[num+2,1,4] and parlindrome[num+3,0,6]:
+        return True
+    return False
+
+def check_all():
+    num=100000
+    while num <999996:
+        if check(num):
+            print(num)
+        num +=1
+
+print('num=',num)
+
+
+
+
+
+
+
+
+
