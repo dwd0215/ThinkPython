@@ -1,0 +1,160 @@
+#10.1
+def nested_sum(t):
+    total=0
+    for i in t:
+        total += sum(i)   #一开始是sum(t[x]),结果报错TypeError。因为i此时的赋值就是一个列表，而不需要再用t[i]去引用
+    return total
+
+print(nested_sum([[1,2],[5],[0,2]]))
+
+#10.2
+'''试错写法：
+def cumsum(t):
+    t1=[t[0]]   
+    n=len(t)-1
+    m=0
+    add=0
+    while m <=n:
+        for m in t:
+            add +=m+1
+            t1.append(add)
+    return t1
+
+print(cumsum([1,2,3,4]))'''
+
+def cumsum(t):
+    t1=[]
+    n=len(t)-1
+    m=0
+    add=0
+    while m <=n:
+        for m in t:
+            add +=m
+            t1.append(add)
+            m=m+1
+    return t1
+
+print(cumsum([1,2,3,4]))
+
+#10.3
+'''写法一'''
+def middle(t):
+    return t[1:-1]
+
+print(middle([1,2,3,4,5,6,7]))
+
+'''写法二'''
+def middle(t):
+    del t[0]
+    del t[-1]
+    return t
+
+print(middle([1,2,3,4,5,6,7]))
+
+#10.4
+def chop(t):
+    del t[0]
+    del t[-1]
+    print(t)   #对比#10.3的方法二，若写return，则不会返回None，写print 就返回None
+
+print(chop([1,2,3,4,5,6]))
+
+#10.5
+def is_sorted(t):
+        return t==sorted(t)   #1.内置函数sorted()会生成一个已排序的新list；2.==布尔运算符
+
+print(is_sorted([3,5,1]))
+
+#10.6
+'''不会！！！'''
+def is_anagram(word1,word2):
+    word1.sort()
+    word2.sort()
+    return word1 == word2
+
+word1='spot'
+word2='post'
+print(is_anagram([word1,word2]))
+
+#10.7
+def has_duplicates(t):
+    n=len(t)-1
+    if n<=0:
+        return False
+
+    m=0
+    t1=sorted(t)
+    while m < n:
+        for m in t1:
+            if t1[m] == t1[m+1]:
+                return True
+            m=m+1
+    return False
+
+print(has_duplicates([1,2,5,3,4,2]))
+
+#10.8
+'''需要帮忙debug一下😔'''
+import random
+def has_duplicates(t):
+    n=len(t)-1
+    if n<=0:
+        return False
+
+    m=0
+    t1=sorted(t)
+    while m < n:
+        for m in t1:
+            if t1[m] == t1[m+1]:
+                return True
+            m=m+1
+    return False
+
+def random_birthday(number):
+    b=[]
+    for i in number:
+        add=random.randint(1,365)
+        b.append(add)
+    return b
+
+def count(num_students,num_trials):
+    count=0
+    for i in num_trials:
+        t=random_birthday(num_students)
+        if has_duplicates(t):
+            count +=1
+    return count
+
+num_students='23'
+num_trials='1000'
+print(count(num_students,num_trials))
+
+#10.9
+def way1():
+    fin=open('words.txt')
+    t=[]
+    for line in fin:
+        add=line.strip()
+        t.append(add)
+    return t
+
+def way2():
+    fin = open('words.txt')
+    t = []
+    for line in fin:
+        add = line.strip()
+        t=t+[add]
+    return t
+
+#10.10
+
+#10.11
+
+#10.12
+
+
+
+
+
+
+
