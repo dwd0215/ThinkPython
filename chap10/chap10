@@ -147,8 +147,72 @@ def way2():
     return t
 
 #10.10
+import bisect
+def word_list():
+    word_list=[]
+    fin=open('words.txt')
+    for line in fin:
+        words=line.strip()
+        word_list.append(words)
+    return word_list
+
+def in_bisect(list,word):
+    low,high=0,len(list)
+    if high==0:
+        return False
+
+    middle=(low+high-1)//2
+    if list[middle]==word:
+        return True
+    elif list[middle]>word:
+        return in_bisect(list[:middle],word)
+    else:
+        return in_bisect(list[middle+1:],word)
+
+def in_bisect_position(list,word):
+    a = bisect.bisect(list,word)
+    b = bisect.bisect_left(list,word)
+    if a==b:
+        return None
+    if a>b:
+        return b+1
+
+list=word_list()
+word='zymurgy'
+print(word,'in list',in_bisect(list,word))
+print(word,'in list',in_bisect_position(list,word))
 
 #10.11
+import bisect
+def word_list():
+    word_list=[]
+    fin=open('words.txt')
+    for line in fin:
+        words=line.strip()
+        word_list.append(words)
+    return word_list
+
+def in_bisect(list,word):
+    low,high=0,len(list)
+    if high==0:
+        return False
+
+    middle=(low+high-1)//2
+    if list[middle]==word:
+        return True
+    elif list[middle]>word:
+        return in_bisect(list[:middle],word)
+    else:
+        return in_bisect(list[middle+1:],word)
+
+def reverse_list(list,word):
+    rev_word=word[::-1]
+    return in_bisect(list,rev_word)
+
+list=word_list()
+for word in list:
+    if reverse_list(list,word):
+        print(word,word[::-1])
 
 #10.12
 
