@@ -1,0 +1,118 @@
+#13.1
+import string
+def words_list(filename):
+    fin = open(filename)
+    read = fin.readlines()     #读取每一行并以list形式返回
+    t = []
+    for line in read:
+        word = line.strip(string.punctuation + string.whitespace).lower()
+        t.append(word)
+    return t
+
+#13.2
+def count_fre(filename):
+    t = words_list(filename)
+    d = {}
+    for subelement in t:
+        for word in subelement.split(' '):     # 二维列表的遍历！！
+            d[word] =d.setdefault(word,0)+1
+        return d
+    return sum(d.values())
+
+#13.3
+def print_most_20fre(filename, n):
+    d = count_fre(filename)
+    t = []
+    for key, value in d.items():
+        t.append((value,key))
+        t1 = t.sort()
+        t2 = t1[:n]
+        print(t2)
+
+n=20
+
+#13.4
+def find_difference(file1,file2):
+    t = []
+    for line in file1:
+        if line not in file2:
+            t.append(line)
+        return t
+
+
+
+#13.5
+#复制11.2中的histogram函数
+def histogram(s):
+    d={}
+    for c in s:
+        if c not in d:
+            d[c]=1
+        d[c] +=1
+    return d
+
+#将dict转换为tuple-list，再根据value值还原hist，再进行随机抽取
+import random
+def choose_from_hist(hist):
+    t=[]
+    for key, value in hist.items():
+       n=1
+       while n <= value:
+           t.append(key)
+           n +=1                  #另一种写法不需要while：t.extend([key]*value)
+    return random.choice(t)
+
+t=['a','b','a']
+hist=histogram(t)
+print(choose_from_hist(hist))
+
+#13.6
+
+#13.7
+import string
+import random
+import bisect
+def word_histogram(filename):
+    '''获得一个单词频率的直方图'''
+    hist = {}
+    fp = open(filename)
+    for line in fp:
+        process_line(line,hist)
+    return hist
+
+def process_line(line,hist):
+    line = line.replace('-',' ')
+    for word in line:
+        word = word.strip(string.punctuation + string.whitespace)
+        word = word.lower()
+        hist[word] = hist.setdefault(word,0)+1
+
+def word_cumsum(filename):
+    freqs = []
+    words = []
+    d = word_histogram(filename)
+    total_frequence = 0
+    for key,value in d:
+        total_frequence +=value
+        freqs.append(value)
+        words.append(key)
+    x = random.randint(0, total_frequence)
+    index = bisect.bisect(freqs,x)
+    return words[index]
+
+#13.8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
