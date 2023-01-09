@@ -1,0 +1,55 @@
+#12.1
+def count_frequent(s):
+    c=dict()
+    for i in s:
+        c[i]=c.get(i,0)+1
+    return c              #运用sorted对dictionary进行排序，会根据key对其进行排序，且只取key，以list形式返回。
+
+def most_frequent(s):
+    t=[]
+    c=count_frequent(s)
+    c1=c.items()
+    for letter, frequence in c1:
+        t.append((frequence,letter))
+    t1=sorted(t,reverse=True)
+    return t1
+
+s="hello"
+print(most_frequent(s))
+
+#12.2.1
+def extract_letters(word):
+    t = []
+    add = sorted(word, reverse=True)
+    t.append(add)
+    return t
+
+def anagrams():
+    d = {}
+    fin = open('words.txt')
+    for line in fin:
+        word = line.strip()
+        t = extract_letters(word)
+        if t not in d:
+            d[t] = [word]
+        d[t].append(word)
+    return d
+
+#12.2.2
+def print_anagrams_in_orders():
+    d = anagrams()
+    t = d.items()
+    t1 = []
+    for key,value in t:
+        if len(value) >= 1:
+            t1.append(value)
+        t1.sort()
+    return t1
+
+#12.3
+
+
+
+
+
+
