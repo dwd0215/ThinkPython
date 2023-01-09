@@ -1,0 +1,87 @@
+#11.1
+def create_dict():
+    words = dict()
+    n=0
+    fin = open('words.txt')
+    for line in fin:
+        add=line.strip()
+        n +=1
+        words[add]=n
+    return words
+
+def in_dict(key,d):
+    if key in d:
+        return True
+    return False
+
+key = 'aas'
+d = create_dict()
+print(in_dict(key,d))
+
+#11.2
+def invert_dict(d):
+    inverse = {}
+    for key in d:
+        inverse.setdefault(d[key],[]).append(key)
+    return inverse
+
+d={'a':1,'b':2,'c':3,'d':1}
+print(invert_dict(d))
+
+#11.3
+'''不太能理解备忘录'''
+known={}
+def ack(m,n):
+    if (m,n) in known:
+        return known[m,n]
+    if m==0:
+        return n+1
+    elif m>0 and n==0:
+        return ack(m - 1, 1)
+    elif m > 0 and n > 0:
+        known[m,n]=ack(m-1,ack(m,n-1))
+        return known[m,n]
+
+m=3
+n=6
+print(ack(m,n))
+
+#11.4
+def has_duplicates(t):
+    d={}
+    for k in t:
+        if k in d:
+            return True
+        return d[k]=None
+    return False
+
+#11.5
+def read_words():
+    fin = open('words.txt')
+    t = []
+    for line in fin:
+        add = line.strip()
+        t.append(add)
+    return t
+
+def rotated_words(t):
+    d = {}
+    n = 0
+    for key in t:
+        if key[::-1] in d:
+            n +=1
+            print(n,key,key[::-1])
+            d[key]=None
+        else:
+            d[key]=None
+
+t=read_words()
+print(rotated_words(t))
+
+#11.6
+
+
+
+
+
+
