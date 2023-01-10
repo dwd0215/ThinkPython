@@ -1,0 +1,110 @@
+'''写入文件'''
+# 打开文件之后设置第二个参数 ”w“模式
+# W 模式：①若该文件已存在，则清空原有数据并重新开始 ；②若该文件不存在，则新建一个文件
+fout = open('output.txt','w')
+# open返回一个文件对象
+line1 = 'i want to be free.\n'
+fout.write(line1)
+# 文件对象跟踪自身位置，下次调用write时，会在文件末尾新添数据
+line2 = 'a legendary grand classic'
+fout.write(line2)
+# 关闭文件
+fout.close()
+
+
+'''格式化运算符   即%'''
+# 第一个运算数叫‘格式化字符串’(format string)，包含一个或多个格式化序列(format sequence)；
+# 第二个运算数，受格式化序列指定固定格式。有多个格式化序列时，第二个参数必须是元组。
+t= 'In %d years I have spotted %g %s.' % (3,0.1,'camels')
+print(t)
+# format方法（https://docs.python.org/3/library/stdtypes.html#str.format）；
+# 格式化运算符更多信息（https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting）
+'''格式化控制符   即{1:d}'''
+# {1:d} {参数序号:格式控制符}
+# s字符串，d十进制整数，f、F十进制浮点数，g、G十进制整数或浮点数，e、E科学计算法表示浮点数，o八进制整数，x、X十六进制整数
+money = 5834.5678
+name = 'Tony'
+t1 = '{0:s}年龄是{1:d}，工资是{2:F}元。'. format(name,20,money)
+t2 = '{0}年龄是{1}，工资是{2:0.2F}元。'. format(name,20,money)  # 浮点数保留两位小数点
+print(t1,t2)
+
+
+'''文件名和路径'''
+# 目录（directory/folder），当前目录（current directory），“os”代表“operating system”
+# 【os模块】提供操作文件和目录的函数
+import os
+os.getcwd()  # 返回当前目录名。 ① output.txt相对路径； ②/home/dinsdale/output.txt 绝对路径
+os.path.abspath('output.txt')  # 获得一个文件的绝对路径
+os.path.exists('output.txt')  # 检查一个文件/目录是否存在
+os.path.isfile('output.txt')  # 检查是否是一个文件
+os.path.isdir('/home/dinsdale')  # 检查是否是一个目录
+os.listdir('/home/dinsdale')  # 返回给定目录下的文件列表
+os.path.join(dirname,name)  # 接受一个目录和文件名，并合并为一个完整路径
+'''walk函数'''
+os.walk(树状结构文件夹名称)
+# os.walk()返回一个由3个tuple类型的元素组成的列表。
+# 索引值为0的表元素是文件夹名称，据此可以知道当前在处理的文件夹是哪一个。
+# 索引值为1的表元素是下一层文件夹列表，用来了解在此文件夹中还有几个下层文件夹，分别叫什么名字。
+# 索引值为2的元素是本文件夹内所有的文件列表，列出此文件夹中所有的文件名。
+
+
+'''捕获异常'''
+# try语句。
+# 语法类似if...else语句
+try:
+    fin = open('output.txt')
+except:
+    print('Something went wrong')
+# 从try子句开始执行，若一切正常，except子句会被跳过； 若发生异常，则跳出try子句，执行except子句。
+
+
+'''数据库'''
+# 数据库：存储数据的文件。 大都采用字典的形式，即key映射到value。
+# 【dbm模块】提供创建和更新数据库文件的接口
+import dbm
+db = dbm.open('captions','c')  # 模式c代表：若不存在该数据库就新创建一个
+# 创建新项（字典方法）
+db['cleese.png'] = 'Photo of John Cleese.'
+# 访问某项时，dbm读取文件，返回结果是一个‘字节对象’，其以b开头。 注意与字符串区分
+# >>> db['cleese.png']  >>> b'Photo of John Cleese.'
+# 可对已有键再次赋值，以覆盖旧值，替换新值
+
+
+'''序列化 ：【pickle】模块'''
+# 【dbm模块】局限性：键值都必须是字符串or字节对象
+# 【shelve】：key要求必须是字符串，value可以是任意合法的python数据类型
+# 【pickle模块】能将所有对象转化为适合在数据库中存储的字符串，或者还原字符串为原来对象
+import pickle
+t=[1,2,3]
+t1=pickle.dumps(t)  # 读取对象，返还一个字符串
+t2=pickle.loads(t1)  # 重建对象
+# t和t2有相同的值，但不是同一个对象
+
+'''序列化：【shelve】模块'''
+# 【dbm模块】局限性：键值都必须是字符串or字节对象
+# 【shelve】：key要求必须是字符串，value可以是任意合法的python数据类型
+
+# 创建一个shelf对象，直接使用open函数即可
+import shelve
+s=shelve.open(filename,flag='c',protocol=None,writeback=True)
+# ①filename：文件名；
+# ②flag可选参数：‘r’只读、‘w’可读写、‘n’每次调用都创建一个空文件；
+# ③writeback默认为False，当设置为True时，shelf会将所有从DB中读取到的对象放入一个内存缓存，当close（）时shelf会将缓存对象重新写入DB。
+
+# 对shelf对象增、删、改操作
+import shelve
+s1 = shelve.open('output.txt','w',writeback=True)
+try:
+    s1['qqq']=233  # 增加
+    s1['qqq']=344  # 修改
+    del s1['qqq']  # 删除
+except:
+    s1.close()
+
+
+'''管道'''
+
+
+
+'''编写模块'''
+
