@@ -1,0 +1,26 @@
+def extract_letters(word):
+    t = []
+    add = sorted(word, reverse=True)
+    t.append(add)
+    return t
+
+def anagrams():
+    d = {}
+    fin = open('../words.txt')
+    for line in fin:
+        word = line.strip()
+        t = extract_letters(word)
+        if t not in d:
+            d[t] = [word]
+        d[t].append(word)
+    return d
+
+def print_anagrams_in_orders():
+    d = anagrams()
+    t = d.items()
+    t1 = []
+    for key,value in t:
+        if len(value) >= 1:
+            t1.append(value)
+        t1.sort()
+    return t1
